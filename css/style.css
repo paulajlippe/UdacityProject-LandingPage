@@ -23,6 +23,7 @@ h1 {
     font-family: 'Fira Sans', sans-serif;
     font-size: 3em;
     margin: 2em 1rem;
+    text-align: center;
 }
 
 @media only screen and (min-width: 35em){
@@ -33,7 +34,7 @@ h1 {
 }
 
 h2 {
-    border-bottom: 1px solid #c90;
+    border-bottom: 1px solid rgb(255, 191, 0);
     font-family: 'Oxygen', Sans-Serif;
     font-size: 3em;
     color: #fff;
@@ -68,11 +69,12 @@ section {
     margin: 0;
     text-align: center;
     display: flex;
+    justify-content: space-around;
 }
 
 .navbar__menu li {
     display: inline-block;
-    align-items: right;
+    align-items: left;
     padding: 1em;
     justify-content: space-around;
 }
@@ -93,6 +95,10 @@ section {
     transition: ease 0.3s all;
 }
 
+.active__class {
+    background-color: gray;
+  }
+
 /* Navbar for large screens */
 @media only screen and (max-width: 1064px) {
     .navbar__menu .menu__link {
@@ -105,7 +111,50 @@ section {
     }
 }
 /* Nav for mobile screens */
-@media only screen and (max-width: 768px){} 
+@media only screen and (max-width: 768px) {
+    body {
+        overflow-x: hidden;
+    }
+    .navbar__menu .menu__link {
+        position: absolute;
+        top: 10vh;
+        height: 90vh;
+        right: 0px;
+        background-color: white;
+        display: flex;
+        flex-direction: column;
+        align-items: right;
+        width: 40%;
+        transform: translateX(100%);
+        transition: transform 0.9s ease;
+    }
+
+    .burger{
+        display: block;
+        padding: 10px;
+        align-items: right;
+        background-color: rgb(255, 191, 0);
+    }
+
+    .line1, .line2, .line3 {
+        width: 35px;
+        height: 5px;
+        margin: 7px 0;
+        background-color: rgba(0,13,60);
+        transition: 0.5s;
+    }
+}
+
+.nav-active {
+    transform: translateX(0%);
+}
+
+.button {
+    width: 100%;
+    padding: 1em;
+    color: rgb(255, 191, 0);
+} 
+ 
 
 /* HEADER STYLES */
 .page__header {
@@ -242,5 +291,3 @@ section.active-state .landing__container::after {
 		           rotate(-360deg);
 	}
 }
-
-/* Mobile screen nav */
