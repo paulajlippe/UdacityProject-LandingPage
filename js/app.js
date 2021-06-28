@@ -44,6 +44,18 @@ createNav()
 // append the li 'tabs' to the nav
 
 // Add class 'active' to section when near top of viewport
+function scrollToAnchor(event) {
+    event.preventDefault();
+  
+    let section = document.querySelector(`#${event.target.dataset.section_id}`);
+    window.scrollTo({
+        top: section.offsetTop, // using section's left and top coordinated
+        left: section.offsetLeft,
+        behavior: 'smooth'
+    });
+}
+
+
 
 function sectionActive() {
     const active = sectionActive;
@@ -75,16 +87,6 @@ window.addEventListener('click', function(){
 
 
 // Scroll to anchor ID using scrollTO event
-function scrollToAnchor(event) {
-    event.preventDefault();
-  
-    let section = document.querySelector(`#${event.target.dataset.section_id}`);
-    window.scrollTo({
-        top: section.offsetTop, // using section's left and top coordinated
-        left: section.offsetLeft,
-        behavior: 'smooth'
-    });
-}
 
 
 
