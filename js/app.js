@@ -34,8 +34,15 @@ function createNav() {
         navLiLink.classList.add("menu__link");
         navLi.appendChild(navLiLink);
         ul.appendChild(navLi)
-            }
         }
+            var scroll = document.getElementById("sections");
+            scroll.addEventListener('click', navLiLink => {
+                navLiLink.preventDefault();
+                sections.scrollIntoView({ behavior: "smooth" })
+                });  
+
+    }; 
+           
 createNav()
 
 
