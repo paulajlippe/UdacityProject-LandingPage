@@ -38,91 +38,80 @@ function createNav() {
         }
 createNav()
 
+
 // looping through all the sections
 // create a new list element each run through the loop called 'tabs'
 // set the innerHTML of that element equal to the data attribute of the sections HTMLCollection. Double check the value there! You just want the individual item not the whole sections collection
 // append the li 'tabs' to the nav
 
+    const tabLinks = new Array();
+    const contentDivs = new Array();
+
+    function init() {
+        // Grab the tab links and content divs from the page
+        var tabListItems = document.getElementById('tabs').childNodes;
+        for ( var i = 0; i < tabListItems.length; i++ ) {
+          if (tabListItems[i].nodeName == "li" ) {
+            var tabLink = getFirstChildWithTagName(tabListItems[i], 'a');
+            var id = getHash( tabLink.getAttribute('href') );
+            tabLinks[id] = tabLink;
+            contentDivs[id] = document.getElementById(id);
+          }
+        }
+    }
+
+
 // Add class 'active' to section when near top of viewport
-function scrollToAnchor(event) {
-    event.preventDefault();
-  
-    let section = document.querySelector(`#${event.target.dataset.section_id}`);
-    window.scrollTo({
-        top: section.offsetTop, // using section's left and top coordinated
-        left: section.offsetLeft,
-        behavior: 'smooth'
-    });
-}
 
-
-
-function sectionActive() {
-    const active = sectionActive;
-    const scrollHeight = window.pageYOffset;
-
-    for(let i = 0; i <= sectionActive.length; i++) {
-        tabs.innerHTML = sections[i].getAttribute('data-nav');
-        nav.appendChild(tab);
-        const sectionTop = section.getBoundingClientRect().top;
-        const sectionBot = section.getBoundingClientRect().bottom;
+function setActive(){
+    for(tabLink of contentDivs){
+        if(navchecksize(tabLink)){
+            // use the same technique to 
+            // add the class to the navbar item
+            tabLink.classList.add("active__class");
+        }else{        
+            tabLink.classList.remove("active__class");
+        }
     }
 };
 
-window.addEventListener('click', function(){
-    sectionActive();
-});
 
-// function setActive(){
-//     for(navLiLink of sections){
-//         if(navchecksize(navLiLink)){
-//             // use the same technique to 
-//             // add the class to the navbar item
-//             navLiLink.classList.add("active__class");
-//         }else{        
-//             navLiLink.classList.remove("active__class");
-//         }
-//     }
-// };
+// // Go to Top Function - WIP
+// function createToTopButton() {
+//     //create new buttom element
+//     const topButton = document.createElement('button');
 
+//     // add attributes to the button
+//     topButton.id = 'toTopBtn';
+//     topButton.title = 'Go to top of webpage';
+//     topButton.innerText = 'Top';
+//     // add classes
+//     topButton.classList.add('btn');
+//     topButton.classList.add('btn-scrollTop');
 
-// Scroll to anchor ID using scrollTO event
-
-
-
-
-  /* HIGHLIGHTING NAV IN VIEW */
-
-// Scroll to anchor ID using scrollTO event 
-
-// function scroll_to_anchor(section_id){
-//     var tag = $("#"+section_id);
-//     $('html,body').animate({scrollTop: tag.offset().top},'smooth');
-// };
-
-
+//     //add button to the webpage
+//     document.body.appendChild(topButton);
+// }
 
 
 /** End Main Functions * Begin Events **/
 
-// Build menu 
-// Scroll to section on link click
-// Set sections as active
+
 
 // Make sections colaspable - WIP
-const col = document.getElementsByTagName("collapsible");
-var i;
-for (i = 0; i < col.length; i++) {
-    col[i].addEventListener("click", function() {
-    this.classList.toggle("sectionActive");
-    var content = this.nextElementSibling;
-    if (content.style.display === "block") {
-    content.style.display = "none";
-    } else {
-    content.style.display = "block";
-    }
-    });
-    }
+// const col = document.getElementsByTagName("collapsible");
+// var i;
+// for (i = 0; i < col.length; i++) {
+//     col[i].addEventListener("click", function() {
+//     this.classList.toggle("sectionActive");
+//     var content = this.nextElementSibling;
+//     if (content.style.display === "block") {
+//     content.style.display = "none";
+//     } else {
+//     content.style.display = "block";
+//     }
+//     });
+//     }
 
 // Mobile Burger Nav - WIP
 const navbarSlide = () => {
