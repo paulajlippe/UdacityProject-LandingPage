@@ -60,6 +60,7 @@ const navbarParent = document.querySelector('#navbar__list');
 		});
 		navbarParent.appendChild(navFragment);
 	}
+    addNavItems();
 
 
 /** Create Scroll To Top Button */
@@ -70,9 +71,9 @@ const navbarParent = document.querySelector('#navbar__list');
 		toTopButton.title = 'Go to top of the webpage';
         toTopButton.classList.add('toTop-button');
 	}
+    createToTopButton();
 
 
-/** Events */
 /** Scroll Active State Function */
 
 	function activeSection() {
@@ -90,6 +91,7 @@ const navbarParent = document.querySelector('#navbar__list');
 			});
 		});
 	}
+    activeSection();
 
 
 /** To Top Function */
@@ -105,6 +107,7 @@ const navbarParent = document.querySelector('#navbar__list');
 			}
 		});
 	}
+    displayToTopButton();
 
 
 	function clickToTopButton() {
@@ -114,16 +117,17 @@ const navbarParent = document.querySelector('#navbar__list');
 			document.documentElement.scrollTop = 0; 
 		});
 	}
+    clickToTopButton();
 
 
-// Toogle Burger Nav 
+/** Toogle Burger Nav */
     function navbarToogle () {
         const burger = document.querySelector('.burger');    
         burger.addEventListener('click', () => {
             //toggle
             navbarParent.classList.toggle('navbar__menu--active');
             //animate
-            navbar__list.forEach((link, index) => {
+            navbar__list.forEach (link => {
             if (link.style.animation) {
                 link.style.animation = ""
             } else {
@@ -132,25 +136,6 @@ const navbarParent = document.querySelector('#navbar__list');
             });
         });
     }
-
-/** Function Calls */
-
-	// Build menu
-	addNavItems();
-
-	// To top button
-	createToTopButton();
-
-	// Display to top button
-	displayToTopButton();
-
-	// Click event toTopButton
-	clickToTopButton();
-
-	// Sections as active
-	activeSection();
-
-    // Nav slide for burger menu
     navbarToogle();
 
 });
