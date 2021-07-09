@@ -19,6 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 const sectionsList = document.querySelectorAll('section');
 const navbarParent = document.querySelector('#navbar__list');
+// let navbar__list = Array.from(navbarParent.children);
 
 
 /** Helper Functions */
@@ -111,13 +112,30 @@ const navbarParent = document.querySelector('#navbar__list');
 
 
 	function clickToTopButton() {
-		const toTopBtn = document.getElementById('toTop');
-		toTopBtn.addEventListener('click', () => {
+		const toTopBtns = document.querySelector('#toTop');
+		toTopBtns.addEventListener('click', () => {
 			document.body.scrollTop = 0; 
 			document.documentElement.scrollTop = 0; 
 		});
 	}
     clickToTopButton();
+  
+
+
+    const coll = document.getElementsByClassName("collapsible");
+    let i;
+    
+    for (i = 0; i < coll.length; i++) {
+      coll[i].addEventListener("click", function() {
+        this.classList.toggle("active");
+         content = this.nextElementSibling;
+        if (content.style.display === "block") {
+          content.style.display = "none";
+        } else {
+          content.style.display = "block";
+        }
+      });
+    }
 
 
 /** Toogle Burger Nav */
@@ -137,5 +155,7 @@ const navbarParent = document.querySelector('#navbar__list');
         });
     }
     navbarToogle();
+
+
 
 });

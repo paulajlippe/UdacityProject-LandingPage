@@ -34,7 +34,6 @@ h1 {
 }
 
 h2 {
-    border-bottom: 1px solid #FFBF00;
     font-family: 'Oxygen', Sans-Serif;
     font-size: 2em;
     color: #fff;
@@ -51,7 +50,7 @@ main {
 }
 
 .main-hero {
-    min-height: 30vh;
+    min-height: 20vh;
     padding-top: 2em;
 }
 
@@ -95,15 +94,18 @@ section {
     transition: ease 0.3s all;
 }
 
-.active__class {
-    background-color: gray;
+.navbar__menu .active {
+    background: rgb(14, 0, 75);
+    color: #fff;
+    transition: ease 0.3s all;
   }
-
 
 .nav_active {
     transform: translateX(0%);
 }
 
+
+/* Buttons */
 .button {
     width: 100%;
     padding: 1em;
@@ -111,11 +113,15 @@ section {
 } 
  
 .toTop-button {
-	display: inline;
-	position: static;
-    padding: 5px;
+	display: inline-flex;
+	position: sticky;
+    width: 15vh;
+    height: 15vh;
+    opacity: 85%;
+    padding: 15px;
+    margin: 20px;
     border: 2px;
-    border-radius: 5%;
+    border-radius: 50%;
     background: #FFBF00;
     color: #000D3C;
 }
@@ -123,6 +129,7 @@ section {
 .toTop-button:hover{
 	background-color: #fff;
 }
+
 
 /* HEADER STYLES */
 .page__header {
@@ -132,6 +139,7 @@ section {
     width: 100%;
     z-index: 5;
 }
+
 
 /* FOOTER STYLES */
 .page__footer {
@@ -148,68 +156,88 @@ section {
     text-align: left;
 }
 
-/* Navbar for large screens */
-@media only screen and (max-width: 1064px) {
-    .navbar__menu .menu__link {
-        padding: 1em;
-        font-weight: bold;
-        text-decoration: none;
-        background-color: white;
-        justify-content: space-around;
-        width: 60%;
-    }
-}
-/* Nav for mobile screens */
-@media only screen and (max-width: 768px) {
-    body {
-        overflow-x: hidden;
-    }
-
-    .navbar__menu .menu__link {
-        position: absolute;
-        top: 10vh;
-        height: 90vh;
-        right: 0px;
-        background-color: white;
-        display: flex;
-        flex-direction: column;
-        align-items: right;
-        width: 40%;
-        transform: translateX(100%);
-        transition: transform 0.9s ease;
-    }
-
-    .burger{
-        display: block;
-        padding: 10px;
-        align-items: right;
-        background-color: #FFBF00;
-        font-size: 1rem;
-		z-index: 99;
-    }
-
-    .line1, .line2, .line3 {
-        width: 35px;
-        height: 4px;
-        margin: 7px 0;
-        background-color: #000D3C;
-        transition: 0.5s;
-    }
-}
-
-@media only screen and (min-width: 350px) {
-    .landing__container {
-        max-width: 50em;
-        padding: 4em;
-    }
-}
-
-
 section:nth-of-type(even) .landing__container {
     margin-right: 0;
     margin-left: auto;
     text-align: right; 
 }
+
+
+.colSection {
+    padding: 0px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+}
+
+.collapsible {
+    background-color:#FFBF00;
+    color: #444;
+    cursor: arrow;
+    padding: 10px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 2em;
+}
+
+.collapsible:after {
+    content: '\02795'; /* Unicode character for "plus" sign (+) */
+    font-size: 20px;
+    float: right;
+    margin-left: 5px;
+}
+  
+.active:after {
+    content: "\2796"; /* Unicode character for "minus" sign (-) */
+}
+
+.active, .collapsible:hover {
+    background-color: #ccc;
+}
+
+
+/* -- Mobile View -- */
+@media only screen and (min-width: 350px) {
+.landing__container {
+    max-width: 50em;
+    padding: 4em;
+}
+/* 
+.navbar__menu .menu__link {
+    position: absolute;
+    top: 10vh;
+    height: 90vh;
+    right: 0px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: right;
+    width: 40%;
+    transform: translateX(100%);
+    transition: transform 0.9s ease;
+}
+
+.burger{
+    display: block;
+    padding: 10px;
+    align-items: right;
+    background-color: #FFBF00;
+    font-size: 1rem;
+    z-index: 99;
+}
+
+.line1, .line2, .line3 {
+    width: 35px;
+    height: 4px;
+    margin: 7px 0;
+    background-color: #000D3C;
+    transition: 0.5s;
+} */
+}
+
+
 
 /* BACKGROUND CIRLCES */
 /* Note that background circles are created with psuedo elements before and after */
