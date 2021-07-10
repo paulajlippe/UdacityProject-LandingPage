@@ -19,8 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 const sectionsList = document.querySelectorAll('section');
 const navbarParent = document.querySelector('#navbar__list');
-// let navbar__list = Array.from(navbarParent.children);
-
+let navbar__list = Array.from(navbarParent.children);
 
 /** Helper Functions */
 
@@ -34,68 +33,50 @@ const navbarParent = document.querySelector('#navbar__list');
         return undefined;
     }
 
-
-	function isInViewport(elem) {
-		let bounding = elem.getBoundingClientRect();
-		return (
-			bounding.top +125 >=0 &&
-			bounding.left +125 >= 0 &&
-			bounding.right <= (window.innerWidth || document.documentElement.clientWidth) &&
-			bounding.bottom <= (window.innerHeight || document.documentElement.clientHeight)
-			);
-	}
-
-
-/**  Populate Nav Bar */
+// Populate Nav Bar 
 
 	function addNavItems() {
 		const navFragment = document.createDocumentFragment();
 		sectionsList.forEach((sectElement) => {
 			const navListItem = document.createElement('li');
-			navListItem.innerText = sectElement.getAttribute('data-nav');
-			navListItem.classList.add('menu__link');
-			navListItem.addEventListener('click', () => {
-				sectElement.scrollIntoView({behavior: "smooth"});
-			});
-			navFragment.appendChild(navListItem);
+                navListItem.innerText = sectElement.getAttribute('data-nav');
+                navListItem.classList.add('menu__link');
+                navListItem.addEventListener('click', () => {
+                    sectElement.scrollIntoView({behavior: "smooth"});
+                });
+                navFragment.appendChild(navListItem);
 		});
 		navbarParent.appendChild(navFragment);
 	}
     addNavItems();
 
-
-/** Create Scroll To Top Button */
+// Create Scroll To Top Button 
 
 	function createToTopButton() {
 		const toTopButton = document.createElement('button');
-		toTopButton.id = 'toTop';
-		toTopButton.title = 'Go to top of the webpage';
-        toTopButton.classList.add('toTop-button');
+            toTopButton.id = 'toTop';
+            toTopButton.title = 'Go to top of the webpage';
+            toTopButton.classList.add('toTop-button');
 	}
     createToTopButton();
 
+// Scroll Active State Function
 
-/** Scroll Active State Function */
-
-	function activeSection() {
-		window.addEventListener('scroll', () => {
-			sectionsList.forEach((section) => {
-				const menuItem = getCorrespondingMenu(section);
-                    if (isInViewport(section)) {
-                        menuItem.classList.add('menu__link--active');
-                        section.classList.add('section--active');
-                    }
-                    else {
-                        menuItem.classList.remove('menu__link--active');
-                        section.classList.remove('section--active');
-                    }
-			});
-		});
-	}
-    activeSection();
-
-
-/** To Top Function */
+    function activeViewport(){
+        for(let section of sectionsList){ 
+        const item = section.getBoundingClientRect();
+        const activeElement = document.getElementById(section.id);
+        if (item.y <= 90 && item.bottom >=150){
+            section.classList.add("active-state");
+        }
+        else {
+            section.classList.remove("active-state");
+        }
+        }
+    }
+    document.addEventListener('scroll', activeViewport);
+    
+// To Top Function 
 
 	function displayToTopButton() {
 		const toTopBtn = document.getElementById('toTop');
@@ -110,7 +91,6 @@ const navbarParent = document.querySelector('#navbar__list');
 	}
     displayToTopButton();
 
-
 	function clickToTopButton() {
 		const toTopBtns = document.querySelector('#toTop');
 		toTopBtns.addEventListener('click', () => {
@@ -120,42 +100,20 @@ const navbarParent = document.querySelector('#navbar__list');
 	}
     clickToTopButton();
   
-
+// Make Collapsible
 
     const coll = document.getElementsByClassName("collapsible");
     let i;
-    
-    for (i = 0; i < coll.length; i++) {
-      coll[i].addEventListener("click", function() {
-        this.classList.toggle("active");
-         content = this.nextElementSibling;
-        if (content.style.display === "block") {
-          content.style.display = "none";
-        } else {
-          content.style.display = "block";
-        }
-      });
-    }
-
-
-/** Toogle Burger Nav */
-    function navbarToogle () {
-        const burger = document.querySelector('.burger');    
-        burger.addEventListener('click', () => {
-            //toggle
-            navbarParent.classList.toggle('navbar__menu--active');
-            //animate
-            navbar__list.forEach (link => {
-            if (link.style.animation) {
-                link.style.animation = ""
+        for (i = 0; i < coll.length; i++) {
+        coll[i].addEventListener("click", function() {
+            this.classList.toggle("active");
+            content = this.nextElementSibling;
+            if (content.style.display === "block") {
+            content.style.display = "none";
             } else {
-                link.style.animation = 'navbar__listFade 0.7s ease forwards ${index/7}s';
+            content.style.display = "block";
             }
-            });
         });
-    }
-    navbarToogle();
-
-
+        }
 
 });
